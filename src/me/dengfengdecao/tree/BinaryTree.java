@@ -70,7 +70,7 @@ public class BinaryTree {
 		
 		Stack<TreeNode> stack = new Stack<TreeNode>();		
 		stack.push(node);	// 根节点入栈		
-		while (!stack.isEmpty()) {
+		while (!stack.empty()) {
 			TreeNode currentNode = stack.pop();	// 栈顶节点出栈
 			System.out.print(currentNode.value + "\t"); // 输出栈顶节点值
 			if (currentNode.right != null) {
@@ -94,38 +94,25 @@ public class BinaryTree {
 	
 	// 中序遍历
 	void inorder(TreeNode node) {
-		// TODO:待实现
 		if (node == null) return;
 		
 		Stack<TreeNode> stack = new Stack<TreeNode>();	
-		while (node != null) {
-			while (node.right != null) {	
-				stack.push(node.right);// 当前节点右子树入栈				
-				stack.push(node);	// 当前节点入栈
-				if (node.left != null) {
-					node = node.left;	// 将当前节点的左子树赋给当前节点					
-				} else {
-					node = node.right;
-				}
+		while (node != null || stack.size() > 0) {
+			while (node != null) {	
+				stack.push(node);	// 根入栈
+				node = node.left;	// 左子树依次入栈
 			}
 			
-			node = stack.pop();	// 将当前节点的栈顶节点（根）出栈
-
-			while (node.left != null) {				
-				stack.push(node.left);								
-				stack.push(node);
-				if (node.left != null) {
-					node = node.left;	// 将当前节点的左子树赋给当前节点					
-				} else {
-					node = node.right;
-				}
-			}
+			// 左子树全部入栈后即出栈，若栈顶还有节点继续出栈
+			if (stack.size() > 0) {	
+				node = stack.pop();
+				System.out.print(node.value + "\t");
+				// 将栈顶节点的右子树赋给当前节点
+				node = node.right;
+			}					
+			
 		}
 					
-		while (!stack.isEmpty()) {	// 栈不为空
-			node = stack.pop();
-			System.out.print(node.value + "\t");
-		}					
 	}
 	
 	
@@ -138,17 +125,56 @@ public class BinaryTree {
 		}
 	}
 	
+	// 后序遍历，双栈法
+	void postorder(TreeNode node) {
+		if (node == null) return;
+		
+		Stack<TreeNode> stack = new Stack<TreeNode>();    
+	    Stack<TreeNode> temp = new Stack<TreeNode>();    
+	
+	    while (node != null || stack.size() > 0) {    
+	        while (node != null) {    
+	            temp.push(node);    
+	            stack.push(node);    
+	            node = node.right;   // 右子树先入栈 
+	        }    
+	        
+	        if (stack.size() > 0) {    
+	            node = stack.pop();    
+	            node = node.left;    // 右叶子的父节点的左节点赋给当前节点
+	        }    
+	    }    
+	    while (temp.size() > 0) {	// 把插入序列都插入到了temp 
+	        node = temp.pop();    
+	        System.out.print(node.value + "\t");    
+	    }    
+		
+			
+	}
 	
 	
 	// ======================================= 测试用例 =======================================
+	/*
+	 * 			  2
+	 * 		    /	\
+	 * 	       1      4
+	 * 					\
+	 * 					 12
+	 * 					/	\
+	 * 				   6	 45
+	 * 						/	\
+	 * 					   21	111	
+	 * 			   
+	 */
 	// 用例1:递归先序遍历
+	// 预期结果：2，1，4，12，6，45，21，111 
 	@Test
 	public void test1() {
 		int t[] = {2, 4, 12, 45, 21, 6, 111, 1}; 
 		for (int i=0; i<t.length; i++) {
 			buildBinaryTree(root, t[i]);
 		}
-		System.out.println("递归先序遍历：");
+		System.out.println("递归先序遍历：");		
 		recursionPreorder(root);		
 	}
 	
@@ -165,6 +191,7 @@ public class BinaryTree {
 	
 	
 	// 用例3：非递归先序遍历
+	// 预期结果：2，1，4，12，6，45，21，111 
 	@Test
 	public void test3() {
 		int t[] = {2, 4, 12, 45, 21, 6, 111, 1}; 
@@ -188,6 +215,7 @@ public class BinaryTree {
 	}
 		
 	// 用例5：递归中序遍历
+	// 预期结果：1,2,4,6,12,21,45，111
 	@Test
 	public void test5() {
 		int t[] = {2, 4, 12, 45, 21, 6, 111, 1}; 
@@ -199,7 +227,7 @@ public class BinaryTree {
 		recursionInorder(root);
 	}
 	
-	// 用例6：递归中序遍历，根为null
+	// 用例6：递归中序遍历，根为null	
 	@Test
 	public void test6() {
 		int t[] = {2, 4, 12, 45, 21, 6, 111, 1}; 
@@ -212,6 +240,7 @@ public class BinaryTree {
 	}
 	
 	// 用例7：非递归中序遍历
+	// 预期结果：1,2,4,6,12,21,45，111
 	@Test
 	public void test7() {
 		int t[] = {2, 4, 12, 45, 21, 6, 111, 1}; 
@@ -233,5 +262,53 @@ public class BinaryTree {
 		
 		System.out.println("test8, 非递归中序遍历根为null：");
 		inorder(null);
+	}
+	
+	// 用例9：递归后序遍历
+	// 预期结果：1,6,21,111,45,12,4,2
+	@Test
+	public void test9() {
+		int t[] = {2, 4, 12, 45, 21, 6, 111, 1}; 
+		for (int i=0; i<t.length; i++) {
+			buildBinaryTree(root, t[i]);
+		}
+		
+		System.out.println("test9, 递归后序遍历：");
+		recursionPostorder(root);
+	}
+	// 用例10：递归后序遍历，根为空
+	@Test
+	public void test10() {
+		int t[] = {2, 4, 12, 45, 21, 6, 111, 1}; 
+		for (int i=0; i<t.length; i++) {
+			buildBinaryTree(root, t[i]);
+		}
+		
+		System.out.println("test10, 递归后序遍历，根为空：");
+		recursionPostorder(null);
+	}
+	
+	// 用例11：非递归后序遍历
+	// 预期结果：1,6,21,111,45,12,4,2
+	@Test
+	public void test11() {
+		int t[] = {2, 4, 12, 45, 21, 6, 111, 1}; 
+		for (int i=0; i<t.length; i++) {
+			buildBinaryTree(root, t[i]);
+		}
+		
+		System.out.println("test11, 非递归后序遍历：");
+		postorder(root);
+	}
+	// 用例12：递归后序遍历，根为空
+	@Test
+	public void test12() {
+		int t[] = {2, 4, 12, 45, 21, 6, 111, 1}; 
+		for (int i=0; i<t.length; i++) {
+			buildBinaryTree(root, t[i]);
+		}
+		
+		System.out.println("test12, 递归后序遍历，根为空：");
+		postorder(null);
 	}
 }
