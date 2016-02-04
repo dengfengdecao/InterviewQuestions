@@ -8,22 +8,21 @@ public class SelectionSort {
 	 * 选择排序:首先在未排序序列中找到最小（大）元素，存放到排序序列的起始位置，
 	 * 然后，再从剩余未排序元素中继续寻找最小（大）元素，
 	 * 然后放到已排序序列的末尾。以此类推，直到所有元素均排序完毕。
-	 */
-	void selectionSort(int a[]) {
-		int min = 0;
-		for (int i = 0; i < a.length; i++) {
+	 */		
+	void selectionSort(int arr[]) {
+		int i, j, min, temp, len = arr.length;
+		for (i = 0; i < len; i++) {
 			min = i;
-			int temp = a[i];
-			for (int j = i + 1; j < a.length; j++) {
-				if (a[j] < temp) {
-					temp = a[j];
-					min = j;
-				}
+			for (j = i + 1; j < len; j++) {	// 遍历数组找出最小元素索引
+				if (arr[min] > arr[j])
+					min = j;				
 			}
-			a[min] = a[i];
-			a[i] = temp;
-
-			print(a);
+			
+			temp = arr[min];	// 缓存最小元素
+			arr[min] = arr[i];  // 和最小元素交换  
+			arr[i] = temp;
+			
+			print(arr);
 		}
 	}
 	
