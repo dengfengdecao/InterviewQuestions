@@ -2,6 +2,14 @@ package me.dengfengdecao.sort;
 
 import org.junit.Test;
 
+/**
+ * https://zh.wikipedia.org/wiki/希尔排序
+ * @author linyu
+ * @see 
+ * http://blog.csdn.net/qy1387/article/details/7752973
+ * http://blog.csdn.net/hnzhangshilong/article/details/7037684
+ * http://blog.csdn.net/zzp_403184692/article/details/8014115
+ */
 public class ShellSort {
 
 	/*
@@ -47,7 +55,7 @@ public class ShellSort {
 		shellSort(a);
 	}
 	
-	// 用例1：有重复数据
+	// 用例2：有重复数据
 	@Test
 	public void test2() {
 		int a[] = {4,3,5,1,6,2,7,0,9,8,4};
