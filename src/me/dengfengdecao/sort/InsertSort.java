@@ -36,14 +36,14 @@ public class InsertSort {
 	// 用例1：正常数据
 	@Test
 	public void test1() {
-		int a[] = {49,38,65,97,76,13,27};
+		int a[] = {4,3,5,1,6,2,7,0,9,8};
 		insertSort(a);
 	}
 	
 	// 用例1：有重复数据
 	@Test
 	public void test2() {
-		int a[] = {49,38,65,97,76,13,27,49};
+		int a[] = {4,3,5,1,6,2,7,0,9,8,4};
 		insertSort(a);
 	}
 
