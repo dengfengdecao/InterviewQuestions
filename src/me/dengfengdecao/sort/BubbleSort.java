@@ -50,7 +50,7 @@ public class BubbleSort {
 		bubbleSort(a);
 	}
 	
-	// 用例1：有重复数据
+	// 用例2：有重复数据
 	@Test
 	public void test2() {
 		int a[] = {4,3,5,1,6,2,7,0,9,8,4};
