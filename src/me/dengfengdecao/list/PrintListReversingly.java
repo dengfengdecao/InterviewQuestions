@@ -9,7 +9,8 @@ import org.junit.Test;
  * @author linyu
  *
  */
-public class ListNode {
+
+public class PrintListReversingly {
 	
 
 	<T> void printListReversingly(Node<T> headNode) {
