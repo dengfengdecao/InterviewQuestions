@@ -51,7 +51,8 @@ public class DeleteNodeInList {
 		}
 		
 	}
-	
+
+
 	private void connectedNode(Node n1, Node n2, Node n3, Node n4, Node n5) {
 		if (n1 == null) return;
 		

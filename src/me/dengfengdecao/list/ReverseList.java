@@ -65,8 +65,54 @@ public class ReverseList {
 		public Node(int value) {
 			this.value = value;
 		}
+
+		public int getValue() {
+			return value;
+		}
+
+		public void setValue(int value) {
+			this.value = value;
+		}
+
+		public Node getNext() {
+			return next;
+		}
+
+		public void setNext(Node next) {
+			this.next = next;
+		}
+		
 	}
-	
+	// 构建单链表
+	// n从1开始,返回头节点
+	Node buildList(int n) {			
+		Node head = null;
+		Node cur = null;
+		for (int i = 1; i <= n; i++) {			
+			Node tmp = new Node(i);
+			if (i == 1) {
+				head = tmp;
+			} else if (i == 2) {
+				head.setNext(tmp);				
+			} else {
+				cur.setNext(tmp);
+			}
+			cur = tmp;	// 缓存当前节点
+		}	
+		
+		return head;		
+	}
+
+	/**
+	 * use buildList(int n) instead.
+	 * @param n1
+	 * @param n2
+	 * @param n3
+	 * @param n4
+	 * @param n5
+	 */
+	@SuppressWarnings("unused")
+	@Deprecated 		
 	private void connectedNode(Node n1, Node n2, Node n3, Node n4, Node n5) {
 		if (n1 == null) return;
 		
@@ -90,18 +136,22 @@ public class ReverseList {
 			n5.next = null;
 	}
 	
+	
 	// 输入的链表有多个结点
 	@Test
-	public void test1() throws Exception {
-		Node n1 = new Node(1); 
-		Node n2 = new Node(2); 
+	public void test1() throws Exception {		
+		/*
+		 * Node n1 = new Node(1);
+		 * Node n2 = new Node(2); 
 		Node n3 = new Node(3); 
 		Node n4 = new Node(4); 
 		Node n5 = new Node(5);
 		connectedNode(n1, n2, n3, n4, n5);
+		Node reverseHead = reverseList(n1);
+		*/
 		
-		// Node reverseHead = reverseList(n1);
-		Node reverseHead = recursionlyReverseList(n1);
+		Node head = buildList(5);
+		Node reverseHead = recursionlyReverseList(head);
 		if (reverseHead != null)
 			System.out.println("value=" + reverseHead.value);
 	}
@@ -109,10 +159,11 @@ public class ReverseList {
 	// 输入的链表只有一个结点
 	@Test
 	public void test2() throws Exception {
-		Node n1 = new Node(1); 
-		connectedNode(n1, null, null, null, null);
+		/*Node n1 = new Node(1); 
+		connectedNode(n1, null, null, null, null);*/
 		
-		Node reverseHead = reverseList(n1);
+		Node head = buildList(1);
+		Node reverseHead = reverseList(head);
 		if (reverseHead != null)
 			System.out.println("value=" + reverseHead.value);
 	}

@@ -44,8 +44,55 @@ public class FindKthFromTail {
 		public Node(int value) {
 			this.value = value;
 		}
+
+		public int getValue() {
+			return value;
+		}
+
+		public void setValue(int value) {
+			this.value = value;
+		}
+
+		public Node getNext() {
+			return next;
+		}
+
+		public void setNext(Node next) {
+			this.next = next;
+		}
+		
 	}
 	
+	// 构建单链表
+	// n从1开始,返回头节点
+	Node buildList(int n) {			
+		Node head = null;
+		Node cur = null;
+		for (int i = 1; i <= n; i++) {			
+			Node tmp = new Node(i);
+			if (i == 1) {
+				head = tmp;
+			} else if (i == 2) {
+				head.setNext(tmp);				
+			} else {
+				cur.setNext(tmp);
+			}
+			cur = tmp;	// 缓存当前节点
+		}	
+		
+		return head;		
+	}
+	
+	/**
+	 * use buildList(int n) instead.
+	 * @param n1
+	 * @param n2
+	 * @param n3
+	 * @param n4
+	 * @param n5
+	 */
+	@SuppressWarnings("unused")
+	@Deprecated 	
 	private void connectedNode(Node n1, Node n2, Node n3, Node n4, Node n5) {
 		if (n1 == null) return;
 		
@@ -68,45 +115,50 @@ public class FindKthFromTail {
 		if (n5.next == null)	
 			n5.next = null;
 	}
+	
 	// 测试要找的结点在链表中间
 	@Test
 	public void test1() throws Exception {
-		Node n1 = new Node(1); 
+		/*Node n1 = new Node(1); 
 		Node n2 = new Node(2); 
 		Node n3 = new Node(3); 
 		Node n4 = new Node(4); 
 		Node n5 = new Node(5);
-		connectedNode(n1, n2, n3, n4, n5);
+		connectedNode(n1, n2, n3, n4, n5);*/
 	
-		Node n = findKthFromTail(n1, 2);
+		Node head = buildList(5);
+		Node n = findKthFromTail(head, 2);
 		System.out.println("value=" + n.value);
 	}
 	
 	// 测试要找的结点是链表的尾结点
 	@Test
 	public void test2() throws Exception {
-		Node n1 = new Node(1); 
+	/*	Node n1 = new Node(1); 
 		Node n2 = new Node(2); 
 		Node n3 = new Node(3); 
 		Node n4 = new Node(4); 
 		Node n5 = new Node(5);
-		connectedNode(n1, n2, n3, n4, n5);
+		connectedNode(n1, n2, n3, n4, n5);*/
 		
-		Node n = findKthFromTail(n1, 1);
+		Node head = buildList(5);
+		Node n = findKthFromTail(head, 1);
 		System.out.println("value=" + n.value);
 	}
 	
 	// 测试要找的结点是链表的头结点	
 	@Test
 	public void test3() throws Exception {
-		Node n1 = new Node(1); 
+	/*	Node n1 = new Node(1); 
 		Node n2 = new Node(2); 
 		Node n3 = new Node(3); 
 		Node n4 = new Node(4); 
 		Node n5 = new Node(5);
 		connectedNode(n1, n2, n3, n4, n5);
+		Node n = findKthFromTail(n1, 5);*/
 		
-		Node n = findKthFromTail(n1, 5);
+		Node head = buildList(5);
+		Node n = findKthFromTail(head, 2);
 		System.out.println("value=" + n.value);
 	}
 	
@@ -121,14 +173,16 @@ public class FindKthFromTail {
 	// 测试输入的第二个参数k大于链表的结点总数
 	@Test
 	public void test5() throws Exception {
-		Node n1 = new Node(1); 
+		/*Node n1 = new Node(1); 
 		Node n2 = new Node(2); 
 		Node n3 = new Node(3); 
 		Node n4 = new Node(4); 
 		Node n5 = new Node(5);
-		connectedNode(n1, n2, n3, n4, n5);
+		connectedNode(n1, n2, n3, n4, n5);		
+		Node n = findKthFromTail(n1, 6);*/
 		
-		Node n = findKthFromTail(n1, 6);
+		Node head = buildList(5);
+		Node n = findKthFromTail(head, 6);
 		if (n != null)
 			System.out.println("value=" + n.value);
 	}
@@ -136,14 +190,16 @@ public class FindKthFromTail {
 	// 测试输入的第二个参数k为0
 	@Test
 	public void test6() throws Exception {
-		Node n1 = new Node(1); 
+		/*Node n1 = new Node(1); 
 		Node n2 = new Node(2); 
 		Node n3 = new Node(3); 
 		Node n4 = new Node(4); 
 		Node n5 = new Node(5);
-		connectedNode(n1, n2, n3, n4, n5);
+		connectedNode(n1, n2, n3, n4, n5);		
+		Node n = findKthFromTail(n1, 0);*/
 		
-		Node n = findKthFromTail(n1, 0);
+		Node head = buildList(5);
+		Node n = findKthFromTail(head, 0);
 		if (n != null)
 			System.out.println("value=" + n.value);
 	}
