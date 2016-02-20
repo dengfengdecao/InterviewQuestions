@@ -4,13 +4,18 @@ import java.util.Stack;
 
 import org.junit.Test;
 
-public class BinaryTree {
+/**
+ * 递归和非递归方式遍历二叉树
+ * @author linyu
+ *
+ */
+public class TraversalBinaryTree {
 	
 	/**
 	 * 内部类，节点类
 	 * @author linyu
 	 *
-	 */
+	 
 	class TreeNode {
 		private int value;
 		private TreeNode left;
@@ -19,11 +24,9 @@ public class BinaryTree {
 		public TreeNode(int value) {
 			this.value = value;
 			this.left = null;
-			this.right = null;
-			
-		}
-		
-	}
+			this.right = null;		
+		}				
+	}*/
 	
 	private TreeNode root;	// 根节点
 
