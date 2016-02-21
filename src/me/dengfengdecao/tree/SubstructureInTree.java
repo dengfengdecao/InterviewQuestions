@@ -25,7 +25,7 @@ public class SubstructureInTree {
 	}
 
 	private boolean tree1HasTree2(TreeNode root1, TreeNode root2) {
-		// 达到树A或树B的叶节点
+		// 若到达树A或树B的叶节点则退出递归
 		if (root2 == null) return true;
 		
 		if (root1 == null) return false;
