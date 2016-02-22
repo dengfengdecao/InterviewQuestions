@@ -11,11 +11,12 @@ public class MyStackTest {
 	// 用例1：往空栈添加、删除元素
 	@Test
 	public void test1() throws Exception {
-		MyStack<Character> stack = new MyStack<Character>();
-		stack.push('a');
-		stack.push('b');
-		stack.push('c');
-		char c = stack.pop();
+		// MyStack<Character> stack = new MyStack<Character>();
+		MyStack<Integer> stack = new MyStack<Integer>();
+		stack.push(1);
+		stack.push(2);
+		stack.push(3);
+		Integer c = stack.pop();
 		print("test1", String.valueOf(c));
 	}
 	

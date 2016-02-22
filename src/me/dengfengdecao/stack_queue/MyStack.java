@@ -1,7 +1,6 @@
 package me.dengfengdecao.stack_queue;
 
-import java.util.PriorityQueue;
-import java.util.Queue;
+import java.util.LinkedList;
 
 /**
  * 两个队列实现一个栈
@@ -12,10 +11,11 @@ import java.util.Queue;
  */
 public class MyStack<T> {
 
-	Queue<T> queue1 = new PriorityQueue<>(); 
-	Queue<T> queue2 = new PriorityQueue<>(); 
+	// 链表,在链表尾部添加节点,在链表头部删除节点,与队列相似
+	private LinkedList<T> queue1 = new LinkedList<>(); 
+	private LinkedList<T> queue2 = new LinkedList<>(); 
 	
-	// 入栈,在队1添加节点
+	// 入栈,在队1添加节点,
 	void push (T node) {
 		queue1.add(node);
 	}
