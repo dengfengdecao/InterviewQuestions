@@ -15,47 +15,42 @@ import org.junit.Test;
 public class ReverseList {
 
 	// 迭代
-	Node reverseList(Node head) {
-		if (head == null) return null;
-		
-		Node reverseHead = null;	// 反转之后链表的头节点
+	// 反转1->2->3->4->5->null => null<-1<-2<-3<-4<-5
+	Node reverseList(Node head) {				
 		Node prev = null;	// 当前节点的上一节点
 		Node node = head;	// 当前节点
-		while (node != null) {
-			Node next = node.next;	// 缓存当前节点的下一节点
-			if (node.next == null)
-				reverseHead = node;	
-			
-			// 将当前节点的指针指向上一个节点,即指针反转		
-			node.next = prev;	// 第一次遍历,当前节点(即头节点)的上一节点为空
-			prev = node;	// 将当前节点赋给上一节点(即当前节点变为下一节点的上一节点)
-			node = next;	// 将下一节点赋给当前节点(即指针指向下一节点)
+		Node next = null;	// 当前节点的下一节点
+		while (node != null) {						
+			next = node.next;	// 首先取得当前节点的下一节点							
+			node.next = prev;	// 再将将当前节点的指针指向上一个节点,即指针反转	
+			prev = node;	// 指针反转后上一节点指向当前节点,即上一节点指针向后移动
+			node = next;	// 当前节点指针指向下一节点
 		}
 		
-		return reverseHead; 
+		return prev; // prev = node;node = next;执行这两步后,node指向null,则指向空的当前节点即反转后的头节点
 	}
 	
 	// 递归
+	// 反转1->2->3->4->5->null => null<-1<-2<-3<-4<-5
 	Node recursionlyReverseList(Node head) {
-		if (head == null) return null;
-		
-		Node reverseHead = null;
-		Node prev = null;
-		Node node = head;
-		
-		if (node != null) {
-			Node next = node.next;
-			node.next = prev;
+		Node prev = null;	// 上一节点
+		Node node = head;	// 当前节点
+		Node next = null;	// 下一节点
+		if (node != null) {			
+			next = node.next;	// 得到当前节点的下一节点
+			node.next = prev;	
 			prev = node;
-			node = next;
+			node = next;	// 移动指针到下一节点
 			
-			if (node.next == null)
-				reverseHead = node;
-			else
-				return recursionlyReverseList(node);
-			
+			if (node.next == null) {
+				return node;
+			} else {
+				return recursionlyReverseList(node);				
+			}
+						
 		} 
-		return reverseHead;
+		
+		return prev;
 	}
 	
 	class Node {
@@ -151,6 +146,7 @@ public class ReverseList {
 		*/
 		
 		Node head = buildList(5);
+		// Node reverseHead = reverseList(head);
 		Node reverseHead = recursionlyReverseList(head);
 		if (reverseHead != null)
 			System.out.println("value=" + reverseHead.value);
