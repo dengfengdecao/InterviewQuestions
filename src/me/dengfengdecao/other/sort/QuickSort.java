@@ -1,4 +1,4 @@
-package me.dengfengdecao.sort;
+package me.dengfengdecao.other.sort;
 
 import java.util.Stack;
 
