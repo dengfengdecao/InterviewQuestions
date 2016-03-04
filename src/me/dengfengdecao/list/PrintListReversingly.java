@@ -4,6 +4,8 @@ import java.util.Stack;
 
 import org.junit.Test;
 
+import me.dengfengdecao.list.ReverseList.Node;
+
 /**
  * 输入链表的头节点，从尾到头打印出各节点的值
  * @author linyu
@@ -12,14 +14,14 @@ import org.junit.Test;
 
 public class PrintListReversingly {
 	
-
-	<T> void printListReversingly(Node<T> headNode) {
-		Stack<Node> nodes = new Stack<Node>();
+	// 迭代 
+	void printListReversingly(ListNode head) {
+		Stack<ListNode> nodes = new Stack<ListNode>();
 		
-		Node node = headNode;
-		if (node != null) {
+		ListNode node = head;
+		while (node != null) {
 			nodes.push(node);	// 推入栈顶
-			node = node.nextNode;	// 将头节点的下一个节点赋给当前节点
+			node = node.next;	// 将头节点的下一个节点赋给当前节点
 		}
 		
 		while (!nodes.isEmpty()) {
@@ -29,25 +31,69 @@ public class PrintListReversingly {
 		}		
 	}
 	
-	class Node<T> {
-		private int data;
-		private Node<T> headNode;
-		private Node<T> nextNode;
-	}
-	@Test
-	public void test1() {
-		Node<Integer> node = null;
-		for (int i=0; i<10; i++) {
-			node = new Node<Integer>();
-			if (i == 0) {
-				node.headNode.data = i;
-			} else {
-				node.nextNode.data = i;
-			}
-		}
+	// 递归,逆序打印链表
+	void printListReverseRecursionly(ListNode head) {		
+		if (head == null) return;
 		
-		printListReversingly(node.headNode);
+		ListNode node = head;
+		if (node != null) 			
+			printListReverseRecursionly(node.next);	// 递归调用一次就在虚拟机栈分配一个栈帧
 		
+		System.out.print(node.data + "\t");
 	}
 	
+	class ListNode {
+		int data;
+	    ListNode next;
+		public ListNode(int data) {
+			super();
+			this.data = data;
+		}
+	    
+	}
+	
+	ListNode buildList(int n) {			
+		ListNode head = null;
+		ListNode cur = null;
+		for (int i = 1; i <= n; i++) {			
+			ListNode tmp = new ListNode(i);
+			if (i == 1) {
+				head = tmp;
+			} else if (i == 2) {
+				head.next = tmp;				
+			} else {
+				cur.next = tmp;
+			}
+			cur = tmp;	// 缓存当前节点
+		}	
+		
+		return head;		
+	}
+	
+	private void printNode(ListNode head) {
+		ListNode node = head;
+		while (node != null) {
+			System.out.print(node.data + "\t");
+			node = node.next;
+		}
+		System.out.println();
+	}
+	
+	@Test
+	public void test1() {
+		ListNode head = buildList(5);
+		System.out.println("链表打印前:");
+		printNode(head);
+		System.out.println("逆序打印链表:");		
+		printListReversingly(head);
+	}
+	
+	@Test
+	public void test2() {
+		ListNode head = buildList(5);
+		System.out.println("链表打印前:");
+		printNode(head);
+		System.out.println("递归逆序打印链表:");		
+		printListReverseRecursionly(head);
+	}
 }
