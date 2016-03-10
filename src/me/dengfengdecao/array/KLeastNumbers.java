@@ -1,5 +1,8 @@
 package me.dengfengdecao.array;
 
+import java.util.PriorityQueue;
+import java.util.Queue;
+
 import org.junit.Test;
 
 /**
@@ -71,6 +74,7 @@ public class KLeastNumbers {
 		return l;
 	}
 	
+	// ====================测试代码====================
 	// k小于数组的长度
 	@Test	
 	public void test1() throws Exception {
